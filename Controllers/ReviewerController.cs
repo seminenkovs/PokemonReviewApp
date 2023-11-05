@@ -12,12 +12,12 @@ namespace PokemonReviewApp.Controllers
     [ApiController]
     public class ReviewerController : ControllerBase
     {
-        private readonly ReviewerReository _reviewerReository;
+        private readonly ReviewerRepository _reviewerRepository;
         private readonly IMapper _mapper;
 
-        public ReviewerController(ReviewerReository reviewerReository, IMapper mapper)
+        public ReviewerController(ReviewerRepository reviewerRepository, IMapper mapper)
         {
-            _reviewerReository = reviewerReository;
+            _reviewerRepository = reviewerRepository;
             _mapper = mapper;
         }
 
@@ -25,7 +25,7 @@ namespace PokemonReviewApp.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Reviewer>))]
         public IActionResult GetReviewers()
         {
-            var reviewers = _mapper.Map<List<ReviewerDto>>(_reviewerReository.GetReviewers());
+            var reviewers = _mapper.Map<List<ReviewerDto>>(_reviewerRepository.GetReviewers());
 
             if (!ModelState.IsValid)
             {
@@ -40,11 +40,11 @@ namespace PokemonReviewApp.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetReview(int reviewerId)
         {
-            if (_reviewerReository.ReviewerExists(reviewerId))
+            if (_reviewerRepository.ReviewerExists(reviewerId))
             {
                 return NotFound();
             }
-            var reviewer = _mapper.Map<ReviewerDto>(_reviewerReository.GetReviewer(reviewerId));
+            var reviewer = _mapper.Map<ReviewerDto>(_reviewerRepository.GetReviewer(reviewerId));
 
             if (!ModelState.IsValid)
             {
@@ -58,11 +58,11 @@ namespace PokemonReviewApp.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetReviewsByReviewer(int reviewerId)
         {
-            if (!_reviewerReository.ReviewerExists(reviewerId))
+            if (!_reviewerRepository.ReviewerExists(reviewerId))
             {
                 return NotFound();
             }
-            var reviews = _mapper.Map<List<ReviewDto>>(_reviewerReository.GetReviewsByReviewer(reviewerId));
+            var reviews = _mapper.Map<List<ReviewDto>>(_reviewerRepository.GetReviewsByReviewer(reviewerId));
 
             if (!ModelState.IsValid)
             {
