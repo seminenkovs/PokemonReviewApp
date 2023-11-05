@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp.Data;
 using PokemonReviewApp.Dto;
+using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
 using PokemonReviewApp.Repository;
 
@@ -12,12 +13,12 @@ namespace PokemonReviewApp.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly ReviewRepository _reviewRepository;
+        private readonly IReviewRepository _reviewRepository;
         private readonly IMapper _mapper;
-        private readonly PokemonRepository _pokemonRepository;
+        private readonly IPokemonRepository _pokemonRepository;
 
-        public ReviewController(ReviewRepository reviewRepository,
-            IMapper mapper, PokemonRepository pokemonRepository)
+        public ReviewController(IReviewRepository reviewRepository,
+            IMapper mapper, IPokemonRepository pokemonRepository)
         {
             _reviewRepository = reviewRepository;
             _mapper = mapper;
@@ -47,12 +48,14 @@ namespace PokemonReviewApp.Controllers
             {
                 return NotFound();
             }
+
             var review = _mapper.Map<ReviewDto>(_reviewRepository.GetReview(reviewId));
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             return Ok(review);
         }
 
@@ -65,13 +68,16 @@ namespace PokemonReviewApp.Controllers
             {
                 return NotFound();
             }
+
             var reviews = _mapper.Map<List<ReviewDto>>(_reviewRepository.GetReviewsOfPokemon(pokemonId));
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             return Ok(reviews);
         }
+    }
 }
     

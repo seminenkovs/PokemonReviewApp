@@ -12,10 +12,10 @@ namespace PokemonReviewApp.Controllers
     [ApiController]
     public class ReviewerController : ControllerBase
     {
-        private readonly ReviewerRepository _reviewerRepository;
+        private readonly IReviewerRepository _reviewerRepository;
         private readonly IMapper _mapper;
 
-        public ReviewerController(ReviewerRepository reviewerRepository, IMapper mapper)
+        public ReviewerController(IReviewerRepository reviewerRepository, IMapper mapper)
         {
             _reviewerRepository = reviewerRepository;
             _mapper = mapper;
