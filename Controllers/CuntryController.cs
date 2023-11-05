@@ -44,7 +44,7 @@ namespace PokemonReviewApp.Controllers
             {
                 return NotFound();
             }
-            var country = _mapper.Map<Country>(_countryRepository.GetCountry(countryId));
+            var country = _mapper.Map<CountryDto>(_countryRepository.GetCountry(countryId));
 
             if (!ModelState.IsValid)
             {
