@@ -1,6 +1,5 @@
-﻿namespace PokemonReviewApp.Dto;
+﻿using PokemonReviewApp.Models;
 
-public class ReviewerDto
-{
-    
-}
+namespace PokemonReviewApp.Dto;
+
+public record ReviewerDto(int Id, string FirstName, string LastName, ICollection<Review> Reviews);
