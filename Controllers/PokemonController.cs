@@ -42,7 +42,7 @@ public class PokemonController : Controller
         {
             return NotFound();
         }
-        var pokemon = _mapper.Map<Pokemon>(_pokemonRepository.GetPokemon(pokemonId));
+        var pokemon = _mapper.Map<PokemonDto>(_pokemonRepository.GetPokemon(pokemonId));
 
         if (!ModelState.IsValid)
         {
