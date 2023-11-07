@@ -10,6 +10,7 @@ public class MappingProfiles : Profile
     {
         CreateMap<Pokemon, PokemonDto>();
         CreateMap<Category, CategoryDto>();
+        CreateMap<CategoryDto, Category>();
         CreateMap<Country, CountryDto>();
         CreateMap<Owner, OwnerDto>();
         CreateMap<Review, ReviewDto>();
