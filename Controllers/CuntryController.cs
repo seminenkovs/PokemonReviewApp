@@ -84,8 +84,7 @@ namespace PokemonReviewApp.Controllers
 
             if (ccountry != null)
             {
-                ModelState.AddModelError("", "" +
-                                             "Country already exists");
+                ModelState.AddModelError("", "" + "Country already exists");
                 return StatusCode(442, ModelState);
             }
 
