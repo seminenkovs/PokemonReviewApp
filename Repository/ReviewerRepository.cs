@@ -34,4 +34,14 @@ public class ReviewerRepository : IReviewerRepository
     {
         return _context.Reviewser.Any(r => r.Id == reviewerId);
     }
+
+    public bool CreateReview(Review review)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool Save()
+    {
+        throw new NotImplementedException();
+    }
 }
