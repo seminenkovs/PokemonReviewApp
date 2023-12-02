@@ -17,6 +17,7 @@ public class MappingProfiles : Profile
         CreateMap<Owner, OwnerDto>();
         CreateMap<OwnerDto, Owner>();
         CreateMap<Review, ReviewDto>();
+        CreateMap<ReviewDto, Review>();
         CreateMap<Reviewer, ReviewerDto>();
     } 
 }
