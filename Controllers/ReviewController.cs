@@ -16,13 +16,16 @@ namespace PokemonReviewApp.Controllers
         private readonly IReviewRepository _reviewRepository;
         private readonly IMapper _mapper;
         private readonly IPokemonRepository _pokemonRepository;
+        private readonly IReviewerRepository _reviewerRepository;
 
         public ReviewController(IReviewRepository reviewRepository,
-            IMapper mapper, IPokemonRepository pokemonRepository)
+            IMapper mapper, IPokemonRepository pokemonRepository,
+            IReviewerRepository reviewerRepository)
         {
             _reviewRepository = reviewRepository;
             _mapper = mapper;
             _pokemonRepository = pokemonRepository;
+            _reviewerRepository = reviewerRepository;
         }
 
         [HttpGet]
@@ -82,7 +85,7 @@ namespace PokemonReviewApp.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateReview([FromBody] ReviewDto reviewCreate)
+        public IActionResult CreateReview([FromQuery] int reviwerId, [FromQuery] int pokemonId, [FromBody] ReviewDto reviewCreate)
         {
             if (reviewCreate == null)
             {
@@ -106,6 +109,8 @@ namespace PokemonReviewApp.Controllers
 
             var reviewMap = _mapper.Map<Review>(reviewCreate);
 
+            reviewMap.Pokemon = _pokemonRepository.GetPokemon(pokemonId);
+            reviewMap.Reviewer = _reviewerRepository.GetReviewer(pokemonId);
 
             if (!_reviewRepository.CreateReview(reviewMap))
             {
