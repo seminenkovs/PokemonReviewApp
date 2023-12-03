@@ -2,4 +2,4 @@
 
 namespace PokemonReviewApp.Dto;
 
-public record ReviewerDto(int Id, string FirstName, string LastName, ICollection<Review> Reviews);
+public record ReviewerDto(int Id, string FirstName, string LastName);
