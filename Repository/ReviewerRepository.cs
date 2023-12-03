@@ -35,7 +35,7 @@ public class ReviewerRepository : IReviewerRepository
         return _context.Reviewser.Any(r => r.Id == reviewerId);
     }
 
-    public bool CreateReview(Reviewer reviewer)
+    public bool CreateReviewer(Reviewer reviewer)
     {
         _context.Add(reviewer);
         return Save();
