@@ -35,13 +35,15 @@ public class ReviewerRepository : IReviewerRepository
         return _context.Reviewser.Any(r => r.Id == reviewerId);
     }
 
-    public bool CreateReview(Review review)
+    public bool CreateReview(Reviewer reviewer)
     {
-        throw new NotImplementedException();
+        _context.Add(reviewer);
+        return Save();
     }
 
     public bool Save()
     {
-        throw new NotImplementedException();
+        var saved = _context.SaveChanges();
+        return saved > 0 ? true : false;
     }
 }
