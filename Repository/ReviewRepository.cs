@@ -1,4 +1,5 @@
-﻿using PokemonReviewApp.Data;
+﻿using System.Runtime.InteropServices.ComTypes;
+using PokemonReviewApp.Data;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
 
@@ -36,6 +37,12 @@ public class ReviewRepository : IReviewRepository
     public bool CreateReview(Review review)
     {
         _context.Add(review);
+        return Save();
+    }
+
+    public bool UpdateReview(Review review)
+    {
+        _context.Update(review);
         return Save();
     }
 
