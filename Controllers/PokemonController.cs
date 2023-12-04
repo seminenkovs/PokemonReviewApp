@@ -163,7 +163,7 @@ public class PokemonController : ControllerBase
             return NotFound();
         }
 
-        var reviewsToDelete = _reviewRepository.GetReviewsOfPokemon(pokemonId);
+        var reviewsToDelete = _reviewRepository.GetReviewsOfPokemon(pokemonId).ToList();
         var pokemonToDelete = _pokemonRepository.GetPokemon(pokemonId);
 
         if (!ModelState.IsValid)
@@ -171,7 +171,7 @@ public class PokemonController : ControllerBase
             return BadRequest();
         }
 
-        if (!_reviewRepository.DeleteReviews(reviewsToDelete.ToList()))
+        if (!_reviewRepository.DeleteReviews(reviewsToDelete))
         {
             ModelState.AddModelError("", "Something went wrong when deleting reviews");
         }
